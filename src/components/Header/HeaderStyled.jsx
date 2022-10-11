@@ -1,4 +1,7 @@
-.header{
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+
+export const HeaderStyled = styled.header`
     padding-top: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid black;
@@ -13,4 +16,10 @@
         display: flex;
         gap: 20px;
     }
-}
+`
+
+export const StyledLink = styled(NavLink)`
+    &.active{
+        color: red;
+    }
+`
