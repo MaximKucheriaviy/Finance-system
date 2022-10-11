@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/finance-system/static/css/main.5910cd5b.css",
+    "main.js": "/finance-system/static/js/main.dcb61c92.js",
+    "index.html": "/finance-system/index.html",
+    "main.5910cd5b.css.map": "/finance-system/static/css/main.5910cd5b.css.map",
+    "main.dcb61c92.js.map": "/finance-system/static/js/main.dcb61c92.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5910cd5b.css",
+    "static/js/main.dcb61c92.js"
+  ]
+}
