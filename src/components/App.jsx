@@ -3,7 +3,9 @@ import { ThemeProvider } from "styled-components";
 import { AppStyled, PageContainer } from "./AppStyled";
 import { Aside } from "./Aside/Aside";
 import { Header } from "./Header/Header";
-import { Main } from "pages/Main";
+import { Main } from "pages/Main/Main";
+import { Statistic } from "pages/Statistic/Statistic";
+import { Calculator } from "pages/Calculator/Calculator";
 
 const theme = {
   mainBackground: "wheat",
@@ -20,6 +22,8 @@ export const App = () => {
           <Header/>
           <Routes>
             <Route path="/" element={<Main/>}/>
+            <Route path="statistic" element={<Statistic/>}/>
+            <Route path="calculator" element={<Calculator/>}/>
           </Routes>
         </PageContainer>
       </AppStyled>

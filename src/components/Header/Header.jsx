@@ -1,17 +1,18 @@
 import { HeaderStyled, StyledLink } from "./HeaderStyled"
+import { HeaderContainer } from "./HeaderStyled"
 
 export const Header = () => {
     return <HeaderStyled>
-        <div className="container">
+        <HeaderContainer>
             <h1>Фінансовий помічник</h1>
             <nav>
                 <ul>
                     <li><StyledLink to="/" end>Головна</StyledLink></li>
-                    <li><StyledLink to="/graphiks">Графіки</StyledLink></li>
-                    <li><StyledLink to="/calculator">Калькулятор</StyledLink></li>
+                    <li><StyledLink to="statistic">Графіки</StyledLink></li>
+                    <li><StyledLink to="calculator">Калькулятор</StyledLink></li>
                 </ul>
             </nav>
-        </div>
+        </HeaderContainer>
     </HeaderStyled>
 }
 
