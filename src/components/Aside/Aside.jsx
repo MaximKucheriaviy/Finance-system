@@ -1,28 +1,36 @@
 import { AsideStyled } from "./AsideStyled"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { currensyUpdate } from "servises/currenciApi";
 
 export const Aside = () => {
-
+    const [currency, setCurrency] = useState([]);
 
     useEffect(() => {
-        const currensyUpdate = () => {
-            console.log("currensyUpdate");
-        }
-        const localDate = {
-            updateDate: Date.now(),
-        }
         let currencyInfo = window.localStorage.getItem("currencyInfo");
         if(!currencyInfo){
-            window.localStorage.setItem("currencyInfo", JSON.stringify(localDate));
-            currensyUpdate();
+            currensyUpdate()
+            .then(data => {
+                setCurrency(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
             return;
         }
         currencyInfo = JSON.parse(currencyInfo);
         const storageDate = new Date(currencyInfo.updateDate);
-        const nowDate = new Date(localDate.updateDate);
-        if(storageDate.getDate() !== nowDate.getDate() || storageDate.getMonth() !== nowDate.getMonth() || storageDate.getFullYear() !== nowDate.getFullYear()){
-            window.localStorage.setItem("currencyInfo", JSON.stringify(localDate));
-            currensyUpdate();
+        const nowDate = new Date(Date.now());
+        if(storageDate.getDate() + 5 < nowDate.getDate() || storageDate.getMonth() !== nowDate.getMonth() || storageDate.getFullYear() !== nowDate.getFullYear()){
+            currensyUpdate()
+            .then(data => {
+                setCurrency(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+        else{
+            setCurrency(currencyInfo.data);
         }
     }, []);
 
