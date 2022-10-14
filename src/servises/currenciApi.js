@@ -15,6 +15,15 @@ export async function currensyUpdate(){
     }
 }
 
+export const transformCurrency = (currecy) => {
+    return (1 / currecy).toFixed(2);
+}
+
+
+export function suportedCodes(code){
+    return code === "USD" || code === "EUR" || code === "GBP" || code === "CNY" || code === "PLN" || code === "CZK" 
+}
+
 /*
 UAH
 USD

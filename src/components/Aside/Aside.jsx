@@ -1,6 +1,6 @@
 import { AsideStyled } from "./AsideStyled"
 import { useEffect, useState } from "react"
-import { currensyUpdate } from "servises/currenciApi";
+import { currensyUpdate, transformCurrency, suportedCodes } from "servises/currenciApi";
 
 export const Aside = () => {
     const [currency, setCurrency] = useState([]);
@@ -10,7 +10,7 @@ export const Aside = () => {
         if(!currencyInfo){
             currensyUpdate()
             .then(data => {
-                setCurrency(data);
+                setCurrency(Object.values(data));
             })
             .catch(err => {
                 console.log(err);
@@ -23,18 +23,21 @@ export const Aside = () => {
         if(storageDate.getDate() + 5 < nowDate.getDate() || storageDate.getMonth() !== nowDate.getMonth() || storageDate.getFullYear() !== nowDate.getFullYear()){
             currensyUpdate()
             .then(data => {
-                setCurrency(data);
+                setCurrency(Object.values(data));
             })
             .catch(err => {
                 console.log(err);
             })
         }
         else{
-            setCurrency(currencyInfo.data);
+            setCurrency(Object.values(currencyInfo.data));
         }
     }, []);
 
     return <AsideStyled>
-        this is aside
+        <ul>
+            {currency.filter(({code}) => suportedCodes(code) )
+            .map(({code, value}) => <li key={code}>{`${code} ${transformCurrency(value)}`}</li>)}
+        </ul>
     </AsideStyled>
 }
