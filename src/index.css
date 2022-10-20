@@ -40,3 +40,7 @@ a{
   color: black;
 }
 
+label{
+  display: block;
+}
+

@@ -9,4 +9,5 @@ export const PageContainer = styled.div`
     border: 1px solid ${props => props.theme.borderColor};
     background-color: ${props => props.theme.mainBackground};
     box-shadow: 1px 1px 5px black;
+    flex-grow: 2;
 `;

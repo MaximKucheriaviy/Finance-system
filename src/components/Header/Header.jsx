@@ -8,6 +8,7 @@ export const Header = () => {
             <nav>
                 <ul>
                     <li><StyledLink to="/" end>Головна</StyledLink></li>
+                    <li><StyledLink to="usages">Витрати</StyledLink></li>
                     <li><StyledLink to="statistic">Графіки</StyledLink></li>
                     <li><StyledLink to="calculator">Калькулятор</StyledLink></li>
                 </ul>
