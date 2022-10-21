@@ -9,22 +9,30 @@ import { Calculator } from "pages/Calculator/Calculator";
 import { Usages } from "pages/Usages/Usages";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import { Autorisation } from "pages/Autorisation/Autorisation";
+
 
 
 const theme = {
   mainBackground: "wheat",
-  borderColor: "black"
+  borderColor: "black",
+  inputSelectedColor: "red"
 }
 
 const initialState = {
-  userName: ""
+  userInfo: {}
 }
 
 const rootReduser = (state = initialState, action) => {
   switch (action.type){
-    case "userName/setUsername":
+    case "userInfo/setUsername":
       return {
-        userName: action.payload
+        userInfo: action.payload
+      }
+    case "userInfo/logout":
+      console.log("logout");
+      return {
+        userInfo: {}
       }
     default:
       return state;
@@ -48,6 +56,7 @@ export const App = () => {
               <Route path="statistic" element={<Statistic/>}/>
               <Route path="calculator" element={<Calculator/>}/>
               <Route path="usages" element={<Usages/>}/>
+              <Route path="autorisation" element={<Autorisation/>}/>
             </Routes>
           </PageContainer>
         </AppStyled>
