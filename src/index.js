@@ -4,22 +4,19 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from 'components/App';
 import './index.css';
 import { createContext } from "react";
+import { Provider } from 'react-redux';
+import { stateStore } from 'redux/store';
 
-const defaultContext = {
-  logedUser: "qwewqwewqe",
-  setLogedUser: (user) => {
-    this.logedUser = user;
-  }
-}
 
 export const UserContext = createContext()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserContext.Provider value={defaultContext}>
-      <BrowserRouter basename='/Finance-system'>
-          <App />
-      </BrowserRouter>
-    </UserContext.Provider>
+      <Provider store={stateStore}>
+        <BrowserRouter basename='/Finance-system'>
+            <App />
+        </BrowserRouter>
+      </Provider>
+
   </React.StrictMode>
 );

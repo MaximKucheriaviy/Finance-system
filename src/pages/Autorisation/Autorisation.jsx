@@ -6,6 +6,7 @@ import { InputBox } from "components/InputBox/InputBox";
 import { singIn, singUp } from "servises/firebaseApi";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { setUserInfo } from "redux/actions";
 
 export const Autorisation = () => {
     const loginEmailId = nanoid();
@@ -21,11 +22,7 @@ export const Autorisation = () => {
         const {email, password} = event.target;
         try{
             const userData = await singIn(email.value, password.value);
-            const action = {
-                type: 'userInfo/setUsername',
-                payload: userData
-            }
-            dispatch(action);
+            dispatch(setUserInfo(userData));
         }
         catch(err){
             console.log(err);
@@ -37,11 +34,7 @@ export const Autorisation = () => {
         const {email, password} = event.target;
         try{
             const userData = await singUp(email.value, password.value);
-            const action = {
-                type: 'userInfo/setUsername',
-                payload: userData
-            }
-            dispatch(action);
+            dispatch(setUserInfo(userData));
         }
         catch(err){
             console.log(err);
