@@ -21,7 +21,11 @@ export const Autorisation = () => {
         event.preventDefault();
         const {email, password} = event.target;
         try{
-            const userData = await singIn(email.value, password.value);
+            const data = await singIn(email.value, password.value);
+            const userData = {
+                email: data.email,
+                accessToken: data.accessToken
+            }
             dispatch(setUserInfo(userData));
         }
         catch(err){

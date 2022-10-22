@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 
 export const Main = () => {
     const userData = useSelector(state => state.userInfo);
-    console.log(userData.email);
+    console.log(userData);
     return <MainStyled>
         <Container>
             <h2>Загогловок</h2>

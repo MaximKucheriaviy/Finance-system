@@ -14,12 +14,12 @@ export const Header = () => {
             <nav>
                 <ul>
                     <li><StyledLink to="/" end>Головна</StyledLink></li>
-                    <li><button  onClick={clickHendler}>Вийти</button></li>
                     {!userInfo.email ? 
                     <li><StyledLink to="autorisation" end>Увійти</StyledLink></li>:
                     <>
                         <li><StyledLink to="usages">Витрати</StyledLink></li>
                         <li><StyledLink to="statistic">Графіки</StyledLink></li>
+                        <li><button  onClick={clickHendler}>Вийти</button></li>
                     </>
                     }
                     <li><StyledLink to="calculator">Калькулятор</StyledLink></li>
