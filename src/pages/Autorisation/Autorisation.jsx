@@ -24,7 +24,7 @@ export const Autorisation = () => {
             const data = await singIn(email.value, password.value);
             const userData = {
                 email: data.email,
-                accessToken: data.accessToken
+                accessToken: data.uid
             }
             dispatch(setUserInfo(userData));
         }
@@ -37,7 +37,11 @@ export const Autorisation = () => {
         event.preventDefault();
         const {email, password} = event.target;
         try{
-            const userData = await singUp(email.value, password.value);
+            const data = await singUp(email.value, password.value);
+            const userData = {
+                email: data.email,
+                accessToken: data.uid
+            }
             dispatch(setUserInfo(userData));
         }
         catch(err){

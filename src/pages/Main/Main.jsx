@@ -1,12 +1,11 @@
 import { MainStyled } from "../MainStyled"
 import { Container } from "components/Container/Container"
 import { MainForm } from "components/MainForm/MainForm"
-import { useSelector } from "react-redux"
+//import { useSelector } from "react-redux"
 
 
 export const Main = () => {
-    const userData = useSelector(state => state.userInfo);
-    console.log(userData);
+    //const userData = useSelector(state => state.userInfo);
     return <MainStyled>
         <Container>
             <h2>Загогловок</h2>
