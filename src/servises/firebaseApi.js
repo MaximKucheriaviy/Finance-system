@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
-import { doc, updateDoc, getFirestore, collection, addDoc } from "firebase/firestore"; 
+import { doc, updateDoc, getFirestore, collection, addDoc, getDoc } from "firebase/firestore"; 
 import { storeDispatch } from "redux/store";
 import { setUserDocId } from "redux/slises";
 
@@ -26,6 +26,9 @@ const userDock = doc(db, "financse-system", "6cLJFDAB2mISIdeYoYQd");
 export const singIn = async (email, password) => {
     try{
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userDocData = await getDoc(userDock);
+        const docId = userDocData.data()[userCredential.user.uid]
+        storeDispatch(setUserDocId(docId));       
         return userCredential.user;
     }
     catch(error){
@@ -44,6 +47,7 @@ export const singUp = async (email, password) => {
         await updateDoc(userDock, {
             [userCredential.user.uid]: docRef.id
         })
+        storeDispatch(setUserDocId(docRef.id));
         return userCredential.user;
     }
     catch(error){
