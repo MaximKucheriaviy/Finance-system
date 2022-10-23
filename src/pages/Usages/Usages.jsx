@@ -1,12 +1,33 @@
 import { UsagesStyled, Income, Outcome } from "./UsagesStyled"
 import { Container } from "components/Container/Container"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { setUserDocumentData, getUserDocumentData } from "servises/firebaseApi"
+import { useSelector } from "react-redux"
 
 export const Usages = () => {
+    const userDocId = useSelector(state => state.userDocId.value);
     const [operations, setOperations] = useState([]);
     const [operationType, setOperationType] = useState("");
     const [operationsValue, setOperationsValue] = useState("");
-
+    useEffect(() => {
+        getUserDocumentData(userDocId, "usage")
+        .then(data => {
+            if(!data){
+                return;
+            }
+            console.log(data);
+            setOperations(JSON.parse(data));
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [userDocId]);
+    useEffect(() => {
+        if(operations.length === 0){
+            return;
+        }
+        setUserDocumentData(userDocId, "usage", JSON.stringify(operations));
+    }, [operations, userDocId]);
     const radioHandler = (event) => {
         const value = event.target.value;
         setOperationType(value);

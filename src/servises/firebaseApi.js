@@ -20,7 +20,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const userDock = doc(db, "financse-system", "6cLJFDAB2mISIdeYoYQd");
+const collectionName = "financse-system"
+const userDock = doc(db, collectionName, "6cLJFDAB2mISIdeYoYQd");
+
 
 
 export const singIn = async (email, password) => {
@@ -41,7 +43,7 @@ export const singIn = async (email, password) => {
 export const singUp = async (email, password) => {
     try{
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const docRef = await addDoc(collection(db, "financse-system"), {
+        const docRef = await addDoc(collection(db, collectionName), {
             start: false,
         })
         await updateDoc(userDock, {
@@ -55,4 +57,18 @@ export const singUp = async (email, password) => {
         const errorMessage = error.message;
         console.log(errorMessage);
     };
+}
+
+export const getUserDocumentData = async (docId, field) => {
+    console.log(docId);
+    const docRef = doc(db, collectionName, docId);
+    const data =  await getDoc(docRef);
+    return data.data()[field];
+}
+
+export const setUserDocumentData = async (docId, field, data) => {
+    const docRef = doc(db, collectionName, docId);
+    await updateDoc(docRef, {
+        [field]: data
+    })
 }
