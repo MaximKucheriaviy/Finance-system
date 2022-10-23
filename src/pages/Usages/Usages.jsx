@@ -79,7 +79,6 @@ export const Usages = () => {
                     }
                 }).reverse()}
             </ul>}
-
         </Container>
     </UsagesStyled>
 }
