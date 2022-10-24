@@ -20,3 +20,23 @@ export const InputBox = styled.div`
     }
    }
 `
+
+export const RadioButton = styled.div`
+    display: flex;
+    & label{
+        font-weight: 800;
+    }
+    & input{
+        margin-left: 5px;
+    }
+`
+
+export const RadioContainer = styled.div`
+    & .thumb{
+        display: flex;
+        gap: 10px;
+    }
+    & > .checkboxContainerLabel{
+        font-weight: 800;
+    }
+`

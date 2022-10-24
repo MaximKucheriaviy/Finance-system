@@ -1,8 +1,15 @@
 import { useState } from "react"
+import { InputBox, RadioButton, RadioContainer } from "components/InputBox/InputBox";
+import { StyledForm } from "./MainFormStyled";
+import { nanoid } from "nanoid";
 //import { setUserDocumentData } from "servises/firebaseApi";
 
 export const MainForm = () => {
-    const [autoUsage, setAutoUsage] = useState("");
+    const checboxYesID = nanoid();
+    const checboxNoID = nanoid();
+    const sallaryID = nanoid();
+    const outComeID = nanoid();
+    const [autoUsage, setAutoUsage] = useState("Yes");
 
     const radioHandler = (event) => {
         const value = event.target.value;
@@ -16,26 +23,47 @@ export const MainForm = () => {
         const date = event.target.date.value;
         console.log(date);
     }
-    return <form onSubmit={submitHendler}>
+    return <StyledForm onSubmit={submitHendler}>
         <h2>Головна форма</h2> 
-        <label htmlFor="salary">Введіть ваш щомісячний заробіток</label>
-        <input type="number" name="salaty" id="salary"/>
-        <p>Автовитрати</p>
-        <label htmlFor="">
-            Так
-            <input type="radio" onInput={radioHandler} name="usage" value="Yes"/>
-        </label>
-        <label htmlFor="">
-            Ні
-            <input type="radio" onInput={radioHandler} name="usage" value="No"/>
-        </label>
-        {autoUsage && autoUsage !== "Yes" && <>
-            <label htmlFor="usageValue">Витрати</label>
-            <input type="text" id="usageValue"/>
-        </>}
-        <label htmlFor="time">Термін</label>
-        <input type="date" name="date" id="time"/>
-        <p>Валюта</p>
+        <InputBox>
+            <label htmlFor={sallaryID}>Введіть ваш щомісячний заробіток</label>
+            <input type="number" name="salaty" id={sallaryID}/>
+        </InputBox>
+        <RadioContainer>
+            <p className="checkboxContainerLabel">Автовитрати</p>
+            <div className="thumb">
+                <RadioButton>
+                    <label htmlFor={checboxYesID}>Так</label>
+                    <input 
+                        type="radio" 
+                        onClick={radioHandler} 
+                        name="usage" 
+                        value="Yes" 
+                        checked={autoUsage === "Yes"}
+                        id={checboxYesID}
+                    /> 
+                </RadioButton>
+                <RadioButton>
+                    <label htmlFor={checboxNoID}>Ні</label>
+                    <input 
+                        type="radio" 
+                        onClick={radioHandler} 
+                        name="usage" 
+                        value="No" 
+                        checked={autoUsage === "No"}
+                        id={checboxNoID}
+                    /> 
+                </RadioButton>
+            </div>
+        </RadioContainer>
+        {autoUsage && autoUsage !== "Yes" && <InputBox>
+            <label htmlFor={outComeID}>Витрати</label>
+            <input type="number" name="usage" id={outComeID}/>
+        </InputBox>}
+        <InputBox>
+            <label htmlFor="time">Термін</label>
+            <input type="date" name="date" id="time"/>
+        </InputBox>
         <button type="submit">OK</button>
-    </form>
+    </StyledForm>
 }
