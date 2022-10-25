@@ -1,31 +1,27 @@
 import { UsagesStyled, Income, Outcome } from "./UsagesStyled"
 import { Container } from "components/Container/Container"
 import { useState, useEffect } from "react"
-import { setUserDocumentData, getUserDocumentData } from "servises/firebaseApi"
+import { setUserDocumentData } from "servises/firebaseApi"
 import { useSelector } from "react-redux"
+import { Navigate } from "react-router-dom"
 
 export const Usages = () => {
-    const userDocId = useSelector(state => state.userDocId.value);
+    const userDocId = useSelector(state => state.userDocId.value)
+    const userUsage = useSelector(state => state.userDocument.usage);
     const [operations, setOperations] = useState([]);
     const [operationType, setOperationType] = useState("");
     const [operationsValue, setOperationsValue] = useState("");
     useEffect(() => {
-        getUserDocumentData(userDocId, "usage")
-        .then(data => {
-            if(!data){
-                return;
-            }
-            console.log(data);
-            setOperations(JSON.parse(data));
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }, [userDocId]);
-    useEffect(() => {
-        if(operations.length === 0){
+        if(!userUsage){
             return;
         }
+        setOperations(JSON.parse(userUsage));
+    }, [userUsage]);
+    useEffect(() => {
+        if(operations.length === 0 || !userDocId){
+            return;
+        }
+
         setUserDocumentData(userDocId, "usage", JSON.stringify(operations));
     }, [operations, userDocId]);
     const radioHandler = (event) => {
@@ -52,6 +48,7 @@ export const Usages = () => {
         setOperationsValue("");
     }
     return <UsagesStyled>
+        {!userDocId && <Navigate to="/"/>}
         <Container>
             <h2>Введіть витрати</h2>
             <form onSubmit={submitHendler}>

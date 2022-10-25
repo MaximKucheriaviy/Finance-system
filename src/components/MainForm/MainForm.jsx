@@ -36,7 +36,7 @@ export const MainForm = () => {
                     <label htmlFor={checboxYesID}>Так</label>
                     <input 
                         type="radio" 
-                        onClick={radioHandler} 
+                        onChange={radioHandler} 
                         name="usage" 
                         value="Yes" 
                         checked={autoUsage === "Yes"}
@@ -47,7 +47,7 @@ export const MainForm = () => {
                     <label htmlFor={checboxNoID}>Ні</label>
                     <input 
                         type="radio" 
-                        onClick={radioHandler} 
+                        onChange={radioHandler} 
                         name="usage" 
                         value="No" 
                         checked={autoUsage === "No"}

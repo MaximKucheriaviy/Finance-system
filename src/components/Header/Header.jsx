@@ -2,11 +2,16 @@ import { HeaderStyled, StyledLink } from "./HeaderStyled"
 import { HeaderContainer } from "./HeaderStyled"
 import { useSelector, useDispatch } from "react-redux"
 import { setUserInfo } from "redux/actions"
+import { clearDocument, clearUserDocID } from "redux/slises";
+
+
 export const Header = () => {
-    const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
+    const userInfo = useSelector(state => state.userInfo);
     const clickHendler = (event) => {
-        dispatch(setUserInfo({}))
+        dispatch(setUserInfo({}));
+        dispatch(clearDocument());
+        dispatch(clearUserDocID());
     }
     return <HeaderStyled>
         <HeaderContainer>

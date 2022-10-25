@@ -3,25 +3,16 @@ import { Container } from "components/Container/Container"
 import { MainForm } from "components/MainForm/MainForm"
 import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { getUserDocumentData } from "servises/firebaseApi"
+
 
 
 export const Main = () => {
     const userData = useSelector(state => state.userInfo);
-    const docID = useSelector(state => state.userDocId.value);
+    const userDocumentStart = useSelector(state => state.userDocument.start.value);
     const [appStarted, setAppstarted] = useState(false);
     useEffect(() => {
-        if(!docID){
-            return
-        }
-        getUserDocumentData(docID, "start")
-        .then(data => {
-            setAppstarted(data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }, [docID])
+        setAppstarted(userDocumentStart ? JSON.parse(userDocumentStart) : false);
+    }, [userDocumentStart])
     return <MainStyled>
         <Container>
             <h2>Загогловок</h2>

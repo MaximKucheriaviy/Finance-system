@@ -9,6 +9,7 @@ export const StyledForm = styled.form`
     gap: 10px;
     box-shadow: 0px 0px 10px black;
     border-radius: 10px;
+    margin-bottom: 40px;
     margin-left: auto;
     margin-right: auto;
     width: 450px;
