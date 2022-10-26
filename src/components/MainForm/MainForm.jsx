@@ -9,6 +9,8 @@ export const MainForm = () => {
     const checboxNoID = nanoid();
     const sallaryID = nanoid();
     const outComeID = nanoid();
+    const timeID = nanoid();
+    const targetID = nanoid();
     const [autoUsage, setAutoUsage] = useState("Yes");
 
     const radioHandler = (event) => {
@@ -61,8 +63,12 @@ export const MainForm = () => {
             <input type="number" name="usage" id={outComeID}/>
         </InputBox>}
         <InputBox>
-            <label htmlFor="time">Термін</label>
-            <input type="date" name="date" id="time"/>
+            <label htmlFor={targetID}>Цільова сума</label>
+            <input type="number" name="targer" id={targetID}/>
+        </InputBox>
+        <InputBox>
+            <label htmlFor={timeID}>Термін</label>
+            <input type="date" name="date" id={timeID}/>
         </InputBox>
         <button type="submit">OK</button>
     </StyledForm>

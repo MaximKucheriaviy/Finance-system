@@ -8,6 +8,7 @@ import { Statistic } from "pages/Statistic/Statistic";
 import { Calculator } from "pages/Calculator/Calculator";
 import { Usages } from "pages/Usages/Usages";
 import { Autorisation } from "pages/Autorisation/Autorisation";
+import { Loader } from "./Loader/Loader";
 
 
 
@@ -33,6 +34,7 @@ export const App = () => {
               <Route path="autorisation" element={<Autorisation/>}/>
             </Routes>
           </PageContainer>
+          <Loader/>
         </AppStyled>
       </ThemeProvider>
   );

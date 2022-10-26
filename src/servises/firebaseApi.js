@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
 import { doc, updateDoc, getFirestore, collection, addDoc, getDoc } from "firebase/firestore"; 
 import { storeDispatch } from "redux/store";
-import { setUserDocId, setDocument, updateDocument } from "redux/slises";
+import { setUserDocId, setDocument, updateDocument, showLoader, hideLoader } from "redux/slises";
 
 
 
@@ -26,29 +26,57 @@ const userDock = doc(db, collectionName, "6cLJFDAB2mISIdeYoYQd");
 export const getUserDocumentData = async (docId, field) => {
     console.log(docId);
     const docRef = doc(db, collectionName, docId);
-    const data =  await getDoc(docRef);
-    return data.data()[field];
+    try{
+        storeDispatch(showLoader());
+        const data =  await getDoc(docRef);
+        return data.data()[field];
+    }
+    catch(err){
+        console.log(err);
+    }
+    finally{
+        storeDispatch(hideLoader());
+    }
 }
 
 export const getAllUserDocumentData = async (docId) => {
     console.log(docId);
     const docRef = doc(db, collectionName, docId);
-    const data = await getDoc(docRef);
-    return data.data();
+    try{
+        storeDispatch(showLoader());
+        const data = await getDoc(docRef);
+        return data.data();
+    }
+    catch(err){
+        console.log(err);
+    }
+    finally{
+        storeDispatch(hideLoader());
+    }
 }
 
 export const setUserDocumentData = async (docId, field, data) => {
     const docRef = doc(db, collectionName, docId);
-    await updateDoc(docRef, {
-        [field]: data
-    });
-    storeDispatch(updateDocument({
-        [field]: data
-    }));
+    try{
+        storeDispatch(showLoader());
+        await updateDoc(docRef, {
+            [field]: data
+        });
+        storeDispatch(updateDocument({
+            [field]: data
+        }));
+    }
+    catch(err){
+        console.log(err);
+    }
+    finally{
+        storeDispatch(hideLoader());
+    }
 }
 
 export const singIn = async (email, password) => {
     try{
+        storeDispatch(showLoader());
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const userDocData = await getDoc(userDock);
         const docId = userDocData.data()[userCredential.user.uid];
@@ -61,11 +89,15 @@ export const singIn = async (email, password) => {
         //const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
-    };
+    }
+    finally{
+        storeDispatch(hideLoader());
+    }
 }
 
 export const singUp = async (email, password) => {
     try{
+        storeDispatch(showLoader());
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const docRef = await addDoc(collection(db, collectionName), {
             start: JSON.stringify({value: false}),
@@ -82,6 +114,9 @@ export const singUp = async (email, password) => {
         //const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
-    };
+    }
+    finally{
+        storeDispatch(hideLoader())
+    }
 }
 

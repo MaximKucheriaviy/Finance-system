@@ -55,7 +55,21 @@ export const userDocumentSlice = createSlice({
     }
 })
 
+export const isLoadiogSlice = createSlice({
+    name: "isLoading",
+    initialState: {value: false},
+    reducers:{
+        showLoader: () => {
+            return {value: true};
+        },
+        hideLoader: () => {
+            return {value: false};
+        }
+    }
+})
+
 
 
 export const {setUserDocId, clearUserDocID} = userDocIdSlice.actions;
 export const {setDocument, updateDocument, clearDocument} = userDocumentSlice.actions;
+export const {showLoader, hideLoader} = isLoadiogSlice.actions;
