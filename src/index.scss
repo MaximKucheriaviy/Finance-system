@@ -1,4 +1,5 @@
-@import-normalize; /* bring in normalize.css styles */
+@import "~react-vis/dist/style";
+@import "~react-vis/dist/styles/legends";
 
 * {
   box-sizing: border-box;
