@@ -8,6 +8,7 @@ import { clearDocument, clearUserDocID } from "redux/slises";
 export const Header = () => {
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.userInfo);
+    const started = useSelector(state => state.userDocument.start);
     const clickHendler = (event) => {
         dispatch(setUserInfo({}));
         dispatch(clearDocument());
@@ -22,8 +23,12 @@ export const Header = () => {
                     {!userInfo.email ? 
                     <li><StyledLink to="autorisation" end>Увійти</StyledLink></li>:
                     <>
-                        <li><StyledLink to="usages">Витрати</StyledLink></li>
-                        <li><StyledLink to="statistic">Графіки</StyledLink></li>
+                        {started && JSON.parse(started).value &&
+                        <>
+                            <li><StyledLink to="usages">Витрати</StyledLink></li>
+                            <li><StyledLink to="statistic">Графіки</StyledLink></li>
+                        </>
+                        }
                         <li><button  onClick={clickHendler}>Вийти</button></li>
                     </>
                     }

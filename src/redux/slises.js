@@ -12,7 +12,7 @@ const initialStorageCheckUseDoc = () => {
     const storadUserData = window.sessionStorage.getItem("userDocument");
     if(!storadUserData){
         return {
-            start: {value: ""},
+            start: JSON.stringify({value: ""}),
         };
     }
     return JSON.parse(storadUserData);

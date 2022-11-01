@@ -2,7 +2,8 @@ import { useState } from "react"
 import { InputBox, RadioButton, RadioContainer } from "components/InputBox/InputBox";
 import { StyledForm } from "./MainFormStyled";
 import { nanoid } from "nanoid";
-//import { setUserDocumentData } from "servises/firebaseApi";
+import { sendData } from "servises/mainFormdataSender";
+
 
 export const MainForm = () => {
     const checboxYesID = nanoid();
@@ -22,14 +23,17 @@ export const MainForm = () => {
         event.preventDefault();
         // const monthIncome = event.target.salaty;
         // const monthOutcome = monthIncome / 2;
-        const date = event.target.date.value;
-        console.log(date);
+        const sallary = event.target.sallary.valueAsNumber;
+        const date = event.target.date.valueAsNumber;
+        const outCome = event.target.usage.value === "Yes" ? (sallary / 2) : event.target.outcome.valueAsNumber;
+        const target = event.target.target.valueAsNumber;
+        sendData(sallary, outCome, target, date);
     }
     return <StyledForm onSubmit={submitHendler}>
         <h2>Головна форма</h2> 
         <InputBox>
             <label htmlFor={sallaryID}>Введіть ваш щомісячний заробіток</label>
-            <input type="number" name="salaty" id={sallaryID}/>
+            <input type="number" name="sallary" id={sallaryID}/>
         </InputBox>
         <RadioContainer>
             <p className="checkboxContainerLabel">Автовитрати</p>
@@ -60,11 +64,11 @@ export const MainForm = () => {
         </RadioContainer>
         {autoUsage && autoUsage !== "Yes" && <InputBox>
             <label htmlFor={outComeID}>Витрати</label>
-            <input type="number" name="usage" id={outComeID}/>
+            <input type="number" name="outcome" id={outComeID}/>
         </InputBox>}
         <InputBox>
             <label htmlFor={targetID}>Цільова сума</label>
-            <input type="number" name="targer" id={targetID}/>
+            <input type="number" name="target" id={targetID}/>
         </InputBox>
         <InputBox>
             <label htmlFor={timeID}>Термін</label>

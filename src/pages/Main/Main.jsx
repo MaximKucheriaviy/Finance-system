@@ -8,10 +8,11 @@ import { useState, useEffect } from "react"
 
 export const Main = () => {
     const userData = useSelector(state => state.userInfo);
-    const userDocumentStart = useSelector(state => state.userDocument.start.value);
+    const userDocumentStart = useSelector(state => state.userDocument.start);
     const [appStarted, setAppstarted] = useState(false);
     useEffect(() => {
-        setAppstarted(userDocumentStart ? JSON.parse(userDocumentStart) : false);
+        console.log(userDocumentStart);
+        setAppstarted(userDocumentStart ? JSON.parse(userDocumentStart).value : false);
     }, [userDocumentStart])
     return <MainStyled>
         <Container>
@@ -20,8 +21,9 @@ export const Main = () => {
             {!userData.email ?
                 <MainButton to="autorisation">Увійдіть або зараєструйтеся щоб продовжити</MainButton>: 
                 <>
-                    {!appStarted ? <MainForm/>:
-                    <MainButton to="statistic">Перейти до графіків</MainButton>
+                    {!appStarted ? 
+                        <MainForm/>:
+                        <MainButton to="statistic">Перейти до графіків</MainButton>
                     }
                     
                 </>}
