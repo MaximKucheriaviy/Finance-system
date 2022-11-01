@@ -1,9 +1,10 @@
 import { setUserDocumentData } from "servises/firebaseApi";
 import { stateStore } from "redux/store";
 
-const docId = stateStore.getState().userDocId.value;
+
 
 export const sendData = (income, outcome, target, date) => {
+    const docId = stateStore.getState().userDocId.value;
     console.log(income, outcome, target, date);
     if(!income || !outcome || (!target && !date)){
         console.log("Form not complited");
