@@ -1,6 +1,6 @@
 import { setUserDocumentData } from "servises/firebaseApi";
 import { stateStore } from "redux/store";
-
+import { grafickCalcolation } from "./calculation";
 
 
 export const sendData = (income, outcome, target, date) => {
@@ -26,6 +26,11 @@ export const sendData = (income, outcome, target, date) => {
         type,
         startDate: Date.now()
     }
+
+    const grafickData = grafickCalcolation(data);
+
+
     setUserDocumentData(docId, "start", JSON.stringify({value: true}));
     setUserDocumentData(docId, "setup", JSON.stringify(data));
+    setUserDocumentData(docId, "grafickData", JSON.stringify(grafickData));
 }

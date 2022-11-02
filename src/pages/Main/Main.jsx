@@ -11,7 +11,6 @@ export const Main = () => {
     const userDocumentStart = useSelector(state => state.userDocument.start);
     const [appStarted, setAppstarted] = useState(false);
     useEffect(() => {
-        console.log(userDocumentStart);
         setAppstarted(userDocumentStart ? JSON.parse(userDocumentStart).value : false);
     }, [userDocumentStart])
     return <MainStyled>

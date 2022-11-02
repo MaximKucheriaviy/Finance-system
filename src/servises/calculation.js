@@ -5,9 +5,22 @@ export function grafickCalcolation ({income, outcome, target, time, type, startD
         result.monthRecomendedIncome = (result.monthTotalIncome / 5) * 2;
         result.recomendedTime = Math.ceil(target / result.monthRecomendedIncome);
     }
-    const month = new Date(0);
-    month.setFullYear(month.getFullYear() + Math.floor(result.recomendedTime / 12));
-    month.setMonth(month.getMonth() + result.recomendedTime % 12);
-    const finalDate = new Date(month.getTime() + startDate);
-    console.log(finalDate);
+    result.breakPoints = [];
+    for(let i = 0; i < result.recomendedTime; i++){
+        const month = new Date(0);
+        month.setFullYear(month.getFullYear() + Math.floor((i + 1) / 12));
+        month.setMonth(month.getMonth() + ((i + 1) % 12));
+        const filnal = new Date(startDate + month.getTime()) ;
+        result.breakPoints.push(createBreackPoint(filnal));
+    }
+    return result;
 }
+
+
+function createBreackPoint(data){
+    return{
+        data: data.getTime(),
+        cash: null
+    }
+}
+
