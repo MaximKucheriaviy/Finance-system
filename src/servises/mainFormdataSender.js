@@ -23,7 +23,8 @@ export const sendData = (income, outcome, target, date) => {
         outcome,
         target,
         date,
-        type
+        type,
+        startDate: Date.now()
     }
     setUserDocumentData(docId, "start", JSON.stringify({value: true}));
     setUserDocumentData(docId, "setup", JSON.stringify(data));
