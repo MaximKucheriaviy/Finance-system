@@ -1,30 +1,25 @@
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries, VerticalGridLines} from 'react-vis';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 export const Grafick = () => {
     const grafickDataRedux = useSelector(state => state.userDocument.grafickData);
     const grafickData = grafickDataRedux ? JSON.parse(grafickDataRedux) : {};
-    const verticalTickValue = [];
+    const drawData = [];
+    drawData.push({ideal: 0, name: "0"});
     grafickData.breakPoints.forEach((item, index) => {
-        verticalTickValue.push(grafickData.monthRecomendedIncome * (index + 1));
+        drawData.push({
+            ideal: grafickData.monthRecomendedIncome * (index + 1),
+            name: (index + 1).toString()
+        });
     });
-    console.log(verticalTickValue);
+    
     return(
-        <XYPlot
-            width={1000}
-            height={300}
-            fill = "green">
-            <HorizontalGridLines tickValues={verticalTickValue} tickTotal ={verticalTickValue.length}/>
-            <VerticalGridLines />
-            <LineSeries
-                data={[
-                {x: 1, y: 10},
-                {x: 2, y: 5},
-                {x: 3, y: 15}
-                ]}/>
-            <XAxis />
+        <LineChart width={1000} height={250} data={drawData}>
+            <XAxis dataKey="name" />
+            <Line type="monotone" dataKey="ideal" stroke="#8b8b8b" dot={false} />
             <YAxis />
-        </XYPlot>
+            <Tooltip />
+            <CartesianGrid strokeDasharray="3 3" />
+        </LineChart>
     )
 }
