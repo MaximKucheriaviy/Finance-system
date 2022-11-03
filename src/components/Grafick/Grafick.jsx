@@ -12,6 +12,9 @@ export const Grafick = () => {
 
     const setupRedux = useSelector(state => state.userDocument.setup);
     const setup = grafickDataRedux ? JSON.parse(setupRedux) : {};
+
+    const usageRedux = useSelector(state => state.userDocument.usage);
+    const usage = grafickDataRedux ? JSON.parse(usageRedux) : [];
     
     const drawData = [];
     drawData.push({ideal: 0, name: "0", factical: 0});
@@ -31,7 +34,17 @@ export const Grafick = () => {
 
 
     for(let i = 1; i <= checkCountOfMonth(setup.startDate, testDate.value); i++){
-        drawData[i].factical = grafickData.monthTotalIncome * i * Math.random();
+        drawData[i].factical = grafickData.monthTotalIncome * i;
+        usage.forEach(item => {
+            if(grafickData.breakPoints[i - 1].data > item.operationDate){
+                if(item.operationType === "outcome"){
+                    drawData[i].factical -= item.operationsValue;
+                }
+                else if(item.operationType === "income"){
+                    drawData[i].factical += item.operationsValue;
+                }
+            }
+        })
     }
     
 
