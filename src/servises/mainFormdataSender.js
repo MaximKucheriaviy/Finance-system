@@ -33,4 +33,5 @@ export const sendData = (income, outcome, target, date) => {
     setUserDocumentData(docId, "start", JSON.stringify({value: true}));
     setUserDocumentData(docId, "setup", JSON.stringify(data));
     setUserDocumentData(docId, "grafickData", JSON.stringify(grafickData));
+    setUserDocumentData(docId, "usage", JSON.stringify([]));
 }
