@@ -83,7 +83,6 @@ export const dateTest = createSlice({
             state.value -= monthOne.getTime();           
         },
         setTime: (state, action) => {
-            console.log(action.payload);
             state.value = action.payload;
         }
     }

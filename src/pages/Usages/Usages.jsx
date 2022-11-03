@@ -8,6 +8,7 @@ import { Navigate } from "react-router-dom"
 export const Usages = () => {
     const userDocId = useSelector(state => state.userDocId.value)
     const userUsage = useSelector(state => state.userDocument.usage);
+    const data = useSelector(state => state.dateTest.value);
     const [operations, setOperations] = useState([]);
     const [operationType, setOperationType] = useState("");
     const [operationsValue, setOperationsValue] = useState("");
@@ -21,7 +22,6 @@ export const Usages = () => {
         if(operations.length === 0 || !userDocId){
             return;
         }
-
         setUserDocumentData(userDocId, "usage", JSON.stringify(operations));
     }, [operations, userDocId]);
     const radioHandler = (event) => {
@@ -30,7 +30,11 @@ export const Usages = () => {
     }
 
     const inputHendled = (event) => {
-        const value = event.target.value;
+        if(!event.target.value){
+            setOperationsValue("");
+            return;
+        }
+        const value = event.target.valueAsNumber;
         setOperationsValue(value);
     }
 
@@ -38,7 +42,8 @@ export const Usages = () => {
         event.preventDefault();
         const input = {
             operationType,
-            operationsValue
+            operationsValue,
+            operationDate: data + 1000,
         }
         setOperations((prev) => {
             const newArr = [...prev];
@@ -62,7 +67,7 @@ export const Usages = () => {
                 </label>
                 <label>
                     Сума
-                    <input onChange={inputHendled} type="text" name="sum" value={operationsValue}/>
+                    <input onChange={inputHendled} type="number" name="sum" value={operationsValue}/>
                 </label>
                 <button type="submit">Ввести</button>
             </form>

@@ -9,9 +9,12 @@ export const Grafick = () => {
     const dispatch = useDispatch();
     const grafickDataRedux = useSelector(state => state.userDocument.grafickData);
     const grafickData = grafickDataRedux ? JSON.parse(grafickDataRedux) : {};
+
+    const setupRedux = useSelector(state => state.userDocument.setup);
+    const setup = grafickDataRedux ? JSON.parse(setupRedux) : {};
     
     const drawData = [];
-    drawData.push({ideal: 0, name: "0"});
+    drawData.push({ideal: 0, name: "0", factical: 0});
     grafickData.breakPoints.forEach((item, index) => {
         drawData.push({
             ideal: grafickData.monthRecomendedIncome * (index + 1),
@@ -19,13 +22,20 @@ export const Grafick = () => {
         });
     });
     ////////////////////debug//////////////////////
-    const setupRedux = useSelector(state => state.userDocument.setup);
-    const setup = grafickDataRedux ? JSON.parse(setupRedux) : {};
+    
     const testDate = useSelector(state => state.dateTest);
     useEffect(() => {
         dispatch(setTime(setup.startDate));
-    }, []);
-    //////////////////////debug/////////////////////
+    }, [dispatch, setup.startDate]);
+    ///////////////////debug/////////////////////
+
+
+    for(let i = 1; i <= checkCountOfMonth(setup.startDate, testDate.value); i++){
+        drawData[i].factical = grafickData.monthTotalIncome * i * Math.random();
+    }
+    
+
+
     return(<>
         <DateShow date={testDate.value}/>
         <button onClick={() => {dispatch(incrementMonth())}}>increment date</button>
@@ -33,10 +43,19 @@ export const Grafick = () => {
         <LineChart width={1000} height={250} data={drawData}>
             <XAxis dataKey="name" />
             <Line type="monotone" dataKey="ideal" stroke="#8b8b8b" dot={false} />
+            <Line type="monotone" dataKey="factical" stroke="#005724" dot={false} />
             <YAxis />
             <Tooltip />
             <CartesianGrid strokeDasharray="3 3" />
         </LineChart>
     </>
     )
+}
+
+
+function checkCountOfMonth(start, now){
+    const date = new Date(now - start);
+    const template = new Date(0);
+    const countOfMonth = (Math.floor((date.getFullYear() - template.getFullYear()) * 12) + date.getMonth());
+    return countOfMonth;
 }
