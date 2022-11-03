@@ -1,12 +1,16 @@
 import { useSelector } from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { useDispatch } from 'react-redux';
-import { setTime, incrementMonth, decrementMonth } from 'redux/slises';
+import { setTime } from 'redux/slises';
 import { useEffect } from 'react';
-import { DateShow } from 'components/Date/Date';
+import { Navigate } from 'react-router-dom';
+import { reset } from 'servises/firebaseApi';
 
 export const Grafick = () => {
+    
     const dispatch = useDispatch();
+    const docId = useSelector(state => state.userDocId.value);
+
     const grafickDataRedux = useSelector(state => state.userDocument.grafickData);
     const grafickData = grafickDataRedux ? JSON.parse(grafickDataRedux) : {};
 
@@ -18,18 +22,25 @@ export const Grafick = () => {
     
     const drawData = [];
     drawData.push({ideal: 0, name: "0", factical: 0});
-    grafickData.breakPoints.forEach((item, index) => {
-        drawData.push({
-            ideal: grafickData.monthRecomendedIncome * (index + 1),
-            name: (index + 1).toString()
+
+    if(grafickData.breakPoints){
+        grafickData.breakPoints.forEach((item, index) => {
+            drawData.push({
+                ideal: grafickData.monthRecomendedIncome * (index + 1),
+                name: (index + 1).toString()
+            });
         });
-    });
+    }
+
     ////////////////////debug//////////////////////
     
     const testDate = useSelector(state => state.dateTest);
     useEffect(() => {
+        if(testDate.value > 0){
+            return
+        }
         dispatch(setTime(setup.startDate));
-    }, [dispatch, setup.startDate]);
+    }, [dispatch, setup.startDate, testDate.value]);
     ///////////////////debug/////////////////////
 
 
@@ -48,11 +59,8 @@ export const Grafick = () => {
     }
     
 
-
     return(<>
-        <DateShow date={testDate.value}/>
-        <button onClick={() => {dispatch(incrementMonth())}}>increment date</button>
-        <button onClick={() => {dispatch(decrementMonth())}}>decrement date</button>
+        {!grafickData.breakPoints && <Navigate to="/"/>}
         <LineChart width={1000} height={250} data={drawData}>
             <XAxis dataKey="name" />
             <Line type="monotone" dataKey="ideal" stroke="#8b8b8b" dot={false} />
@@ -61,6 +69,7 @@ export const Grafick = () => {
             <Tooltip />
             <CartesianGrid strokeDasharray="3 3" />
         </LineChart>
+        <button onClick={() => reset(docId)}>reset</button>
     </>
     )
 }

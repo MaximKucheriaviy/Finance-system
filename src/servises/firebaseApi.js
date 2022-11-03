@@ -40,7 +40,6 @@ export const getUserDocumentData = async (docId, field) => {
 }
 
 export const getAllUserDocumentData = async (docId) => {
-    console.log(docId);
     const docRef = doc(db, collectionName, docId);
     try{
         storeDispatch(showLoader());
@@ -120,3 +119,10 @@ export const singUp = async (email, password) => {
     }
 }
 
+
+export const reset = (docId) => {
+    setUserDocumentData(docId, "start", JSON.stringify({value: false}));
+    setUserDocumentData(docId, "setup", JSON.stringify({}));
+    setUserDocumentData(docId, "grafickData", JSON.stringify({}));
+    setUserDocumentData(docId, "usage", JSON.stringify([]));
+}
