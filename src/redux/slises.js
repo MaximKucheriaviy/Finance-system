@@ -68,8 +68,30 @@ export const isLoadiogSlice = createSlice({
     }
 })
 
+export const dateTest = createSlice({
+    name: "dateTest",
+    initialState: {value: 0},
+    reducers: {
+        incrementMonth: (state, action) => {
+            const monthOne = new Date(0);
+            monthOne.setMonth(monthOne.getMonth() + 1);
+            state.value += monthOne.getTime();           
+        },
+        decrementMonth: (state, action) => {
+            const monthOne = new Date(0);
+            monthOne.setMonth(monthOne.getMonth() + 1);
+            state.value -= monthOne.getTime();           
+        },
+        setTime: (state, action) => {
+            console.log(action.payload);
+            state.value = action.payload;
+        }
+    }
+})
+
 
 
 export const {setUserDocId, clearUserDocID} = userDocIdSlice.actions;
 export const {setDocument, updateDocument, clearDocument} = userDocumentSlice.actions;
 export const {showLoader, hideLoader} = isLoadiogSlice.actions;
+export const {incrementMonth, decrementMonth, setTime} = dateTest.actions;
