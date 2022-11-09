@@ -1,6 +1,7 @@
 import { setUserDocumentData } from "servises/firebaseApi";
 import { stateStore } from "redux/store";
-import { grafickCalcolation } from "./calculation";
+import { grafickCalcolation, ifTotalPosible } from "./calculation";
+
 
 
 export const sendData = (income, outcome, target, date) => {
@@ -15,6 +16,11 @@ export const sendData = (income, outcome, target, date) => {
     }
     else if(target && !date){
         type = "sum"
+    }
+
+    if(type === "total" && !ifTotalPosible(target, date,  Date.now(), income, outcome)){
+        console.error("This is inposible");
+        return;
     }
 
     const data = {
