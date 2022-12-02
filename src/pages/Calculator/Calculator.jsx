@@ -8,6 +8,7 @@ import { InputBox } from "components/InputBox/InputBox";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { calculeateWeek, calculeateMonth } from "servises/presentsCalc";
+import { CalculationResults } from "components/CalculationResults/CalculationResults";
 
 export const Calculator = () => {
     const depoisteID = nanoid();
@@ -19,6 +20,7 @@ export const Calculator = () => {
     const [deposite, setDeposite] = useState(0);
     const [presnts, setPresents] = useState(0);
     const [week, setWeek] = useState({});
+    const [calcResults, setCalcResults] = useState({});
 
     const chageHendler = (event) => {
         switch (event.target.name){
@@ -37,10 +39,10 @@ export const Calculator = () => {
         event.preventDefault();
         const termin = event.target.select.value;
         if(termin === "1week" || termin === "2weeks" || termin === "3weeks"){
-            console.log(calculeateWeek(deposite, presnts, termin)); 
+            setCalcResults(calculeateWeek(deposite, presnts, termin)); 
         }
         else{
-            calculeateMonth(deposite, presnts, termin);
+            setCalcResults(calculeateMonth(deposite, presnts, termin));
         }
     }
 
@@ -86,6 +88,12 @@ export const Calculator = () => {
                 </InputBox>
                 <button type="submit">Розрахувати</button>
             </StyledForm>
+            {calcResults.totalIncome && <CalculationResults 
+                                        startSum={deposite} 
+                                        totalIncome={calcResults.totalIncome}
+                                        pureIncome={calcResults.pureIncome}
+                                        tableData={calcResults.tableData}
+                                        />}
         </Container>
     </CalculatorStyled>
 }

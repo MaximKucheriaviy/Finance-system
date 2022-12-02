@@ -3,6 +3,7 @@ import { HeaderContainer } from "./HeaderStyled"
 import { useSelector, useDispatch } from "react-redux"
 import { setUserInfo } from "redux/actions"
 import { clearDocument, clearUserDocID } from "redux/slises";
+import logo from "../../images/logo.png";
 
 
 export const Header = () => {
@@ -16,7 +17,7 @@ export const Header = () => {
     }
     return <HeaderStyled>
         <HeaderContainer>
-            <h1>Фінансовий помічник</h1>
+            <img src={logo} alt="logo" />
             <nav>
                 <ul>
                     <li><StyledLink to="/" end>Головна</StyledLink></li>

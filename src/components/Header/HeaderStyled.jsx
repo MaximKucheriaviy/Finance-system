@@ -3,14 +3,18 @@ import { NavLink } from "react-router-dom";
 import { ContainerStyled } from "components/Container/Container";
 
 export const HeaderStyled = styled.header`
-    padding-top: 20px;
-    padding-bottom: 20px;
     border-bottom: 1px solid black;
     box-shadow: 0px 0px 5px black;
 
     & ul{
         display: flex;
         gap: 20px;
+    }
+
+    & img{
+        width: 200px;
+        height: 100px;
+        /* outline: 2px solid red; */
     }
 `
 
