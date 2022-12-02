@@ -48,9 +48,7 @@ export const Calculator = () => {
     return <CalculatorStyled>
         <Container>
             <h2>Калькулятор</h2>
-<<<<<<< Updated upstream
             <p>На цій сторінці ми можемо запропонувати вам інструменти для планування ваших депозитів, а також конвертер валют</p>
-=======
             <StyledForm onSubmit={submitHandler}>
                 <h2>Калькулятор складних відсотків</h2>
                 <InputBox>
@@ -88,13 +86,6 @@ export const Calculator = () => {
                 </InputBox>
                 <button type="submit">Розрахувати</button>
             </StyledForm>
-
-
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum quas voluptas sequi quasi facere delectus architecto consequuntur nisi deserunt! Delectus dolorem, doloremque aliquid sequi ratione expedita natus. Corporis, cum! Dolorum dolore non odit quam natus atque minima assumenda tempora debitis iste nobis, error nostrum sequi facilis excepturi. Delectus illum excepturi exercitationem? Ea quae neque, maiores quaerat eligendi quibusdam ullam dolore, enim incidunt autem odit architecto beatae excepturi placeat! Eos voluptatibus vero repudiandae, sequi unde, provident esse, voluptates quos rerum dignissimos omnis impedit harum qui possimus id non dicta reprehenderit. Molestiae quia corporis officiis quos nisi saepe minus facere, iure maiores.</p>
->>>>>>> Stashed changes
-            <DateShow date={testDate.value}/>
-            <button onClick={() => {dispatch(incrementMonth())}}>increment date</button>
-            <button onClick={() => {dispatch(decrementMonth())}}>decrement date</button>
         </Container>
     </CalculatorStyled>
 }
