@@ -23,6 +23,7 @@ export const Calculator = () => {
     const [calcResults, setCalcResults] = useState({});
 
     const chageHendler = (event) => {
+        setCalcResults({});
         switch (event.target.name){
             case "deposite":
                 setDeposite(event.target.valueAsNumber);
