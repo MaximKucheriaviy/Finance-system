@@ -1,8 +1,5 @@
 import { Container } from "components/Container/Container";
 import { CalculatorStyled } from "./CalculatorStyled";
-import { DateShow } from "components/Date/Date";
-import { useDispatch, useSelector } from "react-redux";
-import { incrementMonth, decrementMonth } from "redux/slises";
 import { StyledForm } from "components/MainForm/MainFormStyled";
 import { InputBox } from "components/InputBox/InputBox";
 import { nanoid } from "nanoid";
@@ -14,12 +11,9 @@ export const Calculator = () => {
     const depoisteID = nanoid();
     const presentsID = nanoid();
     const selectorID = nanoid();
-    const dispatch = useDispatch();
-    const testDate = useSelector(state => state.dateTest);
 
     const [deposite, setDeposite] = useState(0);
     const [presnts, setPresents] = useState(0);
-    const [week, setWeek] = useState({});
     const [calcResults, setCalcResults] = useState({});
 
     const chageHendler = (event) => {

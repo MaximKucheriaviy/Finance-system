@@ -3,14 +3,13 @@ import { Container } from "components/Container/Container"
 import { MainForm } from "components/MainForm/MainForm"
 import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { reset } from "servises/firebaseApi"
 
 
 
 export const Main = () => {
     const userData = useSelector(state => state.userInfo);
     const userDocumentStart = useSelector(state => state.userDocument.start);
-    const docId = useSelector(state => state.userDocId.value);
+    // const docId = useSelector(state => state.userDocId.value);
     const [appStarted, setAppstarted] = useState(false);
     useEffect(() => {
         setAppstarted(userDocumentStart ? JSON.parse(userDocumentStart).value : false);
@@ -28,7 +27,6 @@ export const Main = () => {
                     }
                     
                 </>}
-                <button onClick={() => reset(docId)}>reset</button>
         </Container>
     </MainStyled>
 }

@@ -19,4 +19,21 @@ export const ResultsSyled = styled.div`
             justify-content: space-between;
         }
     }
+    & .tableData{
+        margin-top: 50px;
+        width: 100%;
+        border-collapse: collapse;
+        & td, th{
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            width: 25%;
+        }
+        & th{
+            background-color: #b87700;
+        }
+        & td{
+            border-bottom: 1px solid grey;
+        }
+    }
 `

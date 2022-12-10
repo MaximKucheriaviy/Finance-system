@@ -8,7 +8,6 @@ export const calculeateWeek = (deposite, presnts, termin) => {;
     else if(termin === "3weeks"){
         presnts = (presnts / 4) * 3;
     }
-    console.log();
     presnts /= 100;
     return {
         totalIncome: Math.floor(deposite + deposite * presnts, 2),
@@ -40,17 +39,25 @@ export const calculeateMonth = (deposite, presnts, termin) => {
 
 function calculatePresents(deposite, presnts, termin){
     let result = 0;
-    console.log(deposite, presnts, termin);
+    const tableData = [];
         for(let i = 0; i < termin; i++){
+            tableData.push({month: i + 1});
             if(i === 0){
                 result += +(deposite + deposite * presnts).toFixed(2);
+                tableData[i].body = deposite;
+                tableData[i].income = +(deposite * presnts).toFixed(2);
+                tableData[i].total = result;
             }
             else{
+                tableData[i].body = result;
                 result += +(result * presnts).toFixed(2);
+                tableData[i].income = +(result * presnts).toFixed(2);
+                tableData[i].total = result;
             }
         }
         return {
             totalIncome: +(result).toFixed(2),
             pureIncome: +(result - deposite).toFixed(2),
+            tableData
         }
 }

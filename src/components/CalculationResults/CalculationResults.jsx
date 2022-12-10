@@ -21,6 +21,24 @@ export const CalculationResults = ({startSum, totalIncome, pureIncome, tableData
                     </li>
                 </ul>
             </div>
+            {tableData && <table className="tableData">
+                <thead>
+                    <tr>
+                    <th>Місяць</th>
+                    <th>Тіло вкладу</th>
+                    <th>Дохід</th>
+                    <th>Разом</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tableData.map(item => <tr key={item.month}>
+                        <td>{item.month}</td>
+                        <td>{(item.body).toFixed(2)}</td>
+                        <td>{(item.income).toFixed(2)}</td>
+                        <td>{(item.total).toFixed(2)}</td>
+                    </tr>)}
+                </tbody>
+            </table>}
         </ResultsSyled>
     )
 }

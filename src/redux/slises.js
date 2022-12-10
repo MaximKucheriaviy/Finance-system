@@ -88,9 +88,20 @@ export const dateTest = createSlice({
     }
 })
 
+export const currentMonthIncomeSlice = createSlice({
+    name: "currentMonthIncome",
+    initialState: {value: 0},
+    reducers: {
+        setCurrentMonthIncome(state, action){
+            state.value = action.payload;
+        }
+    }
+}) 
+
 
 
 export const {setUserDocId, clearUserDocID} = userDocIdSlice.actions;
 export const {setDocument, updateDocument, clearDocument} = userDocumentSlice.actions;
 export const {showLoader, hideLoader} = isLoadiogSlice.actions;
 export const {incrementMonth, decrementMonth, setTime} = dateTest.actions;
+export const {setCurrentMonthIncome} = currentMonthIncomeSlice.actions;

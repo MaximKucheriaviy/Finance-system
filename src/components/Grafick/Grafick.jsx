@@ -20,6 +20,7 @@ export const Grafick = () => {
     const usageRedux = useSelector(state => state.userDocument.usage);
     const usage = grafickDataRedux ? JSON.parse(usageRedux) : [];
     
+    
     const drawData = [];
     drawData.push({ideal: 0, name: "0", factical: 0});
 
@@ -57,6 +58,7 @@ export const Grafick = () => {
             }
         })
     }
+
     
 
     return(<>
