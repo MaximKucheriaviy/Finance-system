@@ -30,7 +30,7 @@ export const Header = () => {
                             <li><StyledLink to="statistic">Графіки</StyledLink></li>
                         </>
                         }
-                        <li><button  onClick={clickHendler}>Вийти</button></li>
+                        <li><button className="outButton"  onClick={clickHendler}>Вийти</button></li>
                     </>
                     }
                     <li><StyledLink to="calculator">Калькулятор</StyledLink></li>

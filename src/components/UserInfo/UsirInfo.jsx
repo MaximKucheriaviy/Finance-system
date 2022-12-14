@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import { UserInfoStyled } from "./UserInfoStyled";
 
 export const UserInfo = () => {
     const grafickDataRedux = useSelector(state => state.userDocument.grafickData);
@@ -23,7 +24,7 @@ export const UserInfo = () => {
         }
     })
     
-    return <ul>
+    return <UserInfoStyled>
         <li>
             <p className="key">Рекомендований вклад</p>
             <p className="value">{grafickData.monthRecomendedIncome}</p>
@@ -36,5 +37,5 @@ export const UserInfo = () => {
             <p className="key">Попередній вклад</p>
             <p className="value">{currentIncome}</p>
         </li>
-    </ul>
+    </UserInfoStyled>
 }

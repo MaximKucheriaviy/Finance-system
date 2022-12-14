@@ -4,12 +4,10 @@ import { useDispatch } from 'react-redux';
 import { setTime } from 'redux/slises';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { reset } from 'servises/firebaseApi';
 
 export const Grafick = () => {
     
     const dispatch = useDispatch();
-    const docId = useSelector(state => state.userDocId.value);
 
     const grafickDataRedux = useSelector(state => state.userDocument.grafickData);
     const grafickData = grafickDataRedux ? JSON.parse(grafickDataRedux) : {};
@@ -71,7 +69,6 @@ export const Grafick = () => {
             <Tooltip />
             <CartesianGrid strokeDasharray="3 3" />
         </LineChart>
-        <button onClick={() => reset(docId)}>reset</button>
     </>
     )
 }

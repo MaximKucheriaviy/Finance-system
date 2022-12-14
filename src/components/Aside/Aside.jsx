@@ -35,9 +35,15 @@ export const Aside = () => {
     }, []);
 
     return <AsideStyled>
-        <ul>
-            {currency.filter(({code}) => suportedCodes(code) )
-            .map(({code, value}) => <li key={code}>{`${code} ${transformCurrency(value)}`}</li>)}
-        </ul>
+        <div class="box">
+            <h2>Курси валют</h2>
+            <ul>
+                {currency.filter(({code}) => suportedCodes(code) )
+                .map(({code, value}) => <li key={code}>
+                    <p className="key">{code}</p>
+                    <p className="value">{transformCurrency(value)}</p>
+                </li>)}
+            </ul>
+        </div>
     </AsideStyled>
 }

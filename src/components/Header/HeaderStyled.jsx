@@ -16,6 +16,14 @@ export const HeaderStyled = styled.header`
         height: 100px;
         /* outline: 2px solid red; */
     }
+
+    & .outButton{
+        display: inline;
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        font-size: 16px;
+    }
 `
 
 export const StyledLink = styled(NavLink)`
@@ -28,4 +36,5 @@ export const HeaderContainer = styled(ContainerStyled)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 0px;
 `
