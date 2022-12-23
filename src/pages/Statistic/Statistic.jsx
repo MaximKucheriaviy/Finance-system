@@ -20,10 +20,10 @@ export const Statistic = () => {
                 <button className="timeButton" onClick={() => {dispatch(decrementMonth())}}>Попередній місяць</button>
                 <button className="timeButton" onClick={() => {dispatch(incrementMonth())}}>Наступний місяць</button>
             </div>
-            <p className="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum quas voluptas sequi quasi facere delectus architecto consequuntur nisi deserunt! Delectus dolorem, doloremque aliquid sequi ratione expedita natus. Corporis, cum! Dolorum dolore non odit quam natus atque minima assumenda tempora debitis iste nobis, error nostrum sequi facilis excepturi. Delectus illum excepturi exercitationem? Ea quae neque, maiores quaerat eligendi quibusdam ullam dolore, enim incidunt autem odit architecto beatae excepturi placeat! Eos voluptatibus vero repudiandae, sequi unde, provident esse, voluptates quos rerum dignissimos omnis impedit harum qui possimus id non dicta reprehenderit. Molestiae quia corporis officiis quos nisi saepe minus facere, iure maiores.</p>
+            <p className="text">На цій сторінці ви зможете відслиткувати прогресс свої накопичень!</p>
             <Grafick/>
             <UserInfo/>
-            <button className="resetButton" onClick={() => {reset(docId)}}>Очистити графік</button>
+            {/* <button className="resetButton" onClick={() => {reset(docId)}}>Очистити графік</button> */}
         </Container>
     </StatisticStyled>
 }
