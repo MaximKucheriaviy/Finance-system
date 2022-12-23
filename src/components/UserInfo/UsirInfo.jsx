@@ -27,15 +27,15 @@ export const UserInfo = () => {
     return <UserInfoStyled>
         <li>
             <p className="key">Рекомендований вклад</p>
-            <p className="value">{grafickData.monthRecomendedIncome}</p>
+            <p className="value">{+(grafickData.monthRecomendedIncome).toFixed(2)}</p>
         </li>
         <li>
             <p className="key">Фактичний вклад</p>
-            <p className="value">{grafickData.monthTotalIncome}</p>
+            <p className="value">{+(grafickData.monthTotalIncome).toFixed(2)}</p>
         </li>
         <li>
             <p className="key">Попередній вклад</p>
-            <p className="value">{currentIncome}</p>
+            <p className="value">{+(currentIncome).toFixed(2)}</p>
         </li>
     </UserInfoStyled>
 }
